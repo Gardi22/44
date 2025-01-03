@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITZ RAHI</title>
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231995754366241"
+     crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="main.css">
+  <script src="main.js" defer></script>
+  <style>
+    /* Add a visually appealing live background */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      background: url('https://source.unsplash.com/1920x1080/?nature,water,forest') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 100px auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .notice {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #17a2b8;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    // Disable right-click to protect your frontend code
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  </script>
+</head>
+<body>
+  <div class="container">
+    <form id="payment-form">
+      <h1>Welcome?</h1>
+
+      <label for="currency">Choose Currency:</label>
+      <select id="currency" name="currency" required>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="IQD">IQD</option>
+      </select>
+
+      <label for="amount">Enter Amount:</label>
+      <input type="number" id="amount" name="amount" placeholder="Enter amount" min="1" step="0.01" required>
+
+      <button type="submit">Proceed</button>
+      <p class="notice">By clicking proceed, you agree to our <a href="#terms">Terms and Conditions</a>.</p>
+    </form>
+
+    <div class="about" id="about">
+      <h2>About Us</h2>
+      <p>
+        Welcome to our Secure Payment Portal. Our goal is to provide a seamless and secure way to transfer payments. 
+        We prioritize security and customer satisfaction, ensuring every transaction is safe and straightforward.
+      </p>
+      <p>
+        For any inquiries, please <a href="0751 201 9773">contact us</a>.
+      </p>
+    </div>
+
+    <div class="terms" id="terms">
+      <h2>Terms and Conditions</h2>
+      <p>
+        All payments are non-refundable. By using this website, you agree to our policies. Unauthorized copying or
+        duplication of this website will result in legal actions. We reserve the right to update our terms without prior notice.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

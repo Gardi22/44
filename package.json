@@ -1,7 +1,7 @@
 {
-  "name": "secure-payment-site",
+  "name": "rahi",
   "version": "1.0.0",
-  "description": "A secure payment website that processes payments through a backend API.",
+  "description": "A secure  website.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,7 +13,7 @@
     "nodejs",
     "backend"
   ],
-  "author": "Your Name",
+  "author": "Rahi",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.0",

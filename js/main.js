@@ -1,23 +1,32 @@
-// Disable right-click
-document.addEventListener("contextmenu", (event) => event.preventDefault());
+document.getElementById("payment-form").addEventListener("submit", async function (e) {
+  e.preventDefault(); // Prevent default form submission
 
-// Disable specific key combinations
-document.addEventListener("keydown", (event) => {
-  // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U
-  if (
-    event.key === "F12" ||
-    (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J")) ||
-    (event.ctrlKey && event.key === "U")
-  ) {
-    event.preventDefault();
+  const currency = document.getElementById("currency").value;
+  const amount = document.getElementById("amount").value;
+
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount.");
+    return;
   }
-});
 
-document.getElementById("confirmOrderBtn").addEventListener("click", () => {
-  const orderNum = document.getElementById("orderNum").textContent;
-  const orderTotal = document.getElementById("orderTotal").textContent;
+  try {
+    const response = await fetch("/process-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currency, amount }),
+    });
 
-  alert(
-    `Order Confirmed!\n\nOrder Number: ${orderNum}\nTotal Amount: $${orderTotal}\n\nPlease transfer the amount to the provided IBAN.`
-  );
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("Payment processed successfully!");
+    } else {
+      alert(`Error: ${result.message}`);
+    }
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    alert("An error occurred while processing your payment.");
+  }
 });
