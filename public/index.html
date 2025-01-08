@@ -3,45 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Portal</title>
-
-  <!-- Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6231995754366241"
-     crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="main.css">
+  <title>Itz RAHi</title>
+  <link rel="stylesheet" href="styles.css">
   <script src="main.js" defer></script>
   <style>
-    /* Add a visually appealing live background */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      color: #fff;
+      color: #333;
       text-align: center;
-      background: url('https://source.unsplash.com/random/1920x1080/?nature') no-repeat center center fixed;
-      background-size: cover;
-      animation: backgroundChange 10s infinite;
+      background-color: #f4f4f4;
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.7);
+      background: #fff;
       border-radius: 10px;
       padding: 20px;
       max-width: 500px;
       margin: 100px auto;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
       margin-bottom: 20px;
+      font-size: 24px;
+      color: #555;
+    }
+
+    label {
+      font-size: 14px;
+      color: #777;
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
     }
 
     input, select {
       padding: 10px;
-      margin: 10px 0;
+      margin: 10px 0 20px;
       width: 100%;
-      border: none;
+      border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 16px;
+      box-sizing: border-box;
     }
 
     button {
@@ -60,29 +64,37 @@
     }
 
     .notice {
-      font-size: 14px;
-      margin-top: 20px;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #888;
     }
 
     a {
-      color: #17a2b8;
+      color: #007bff;
+      text-decoration: none;
     }
 
     a:hover {
       text-decoration: underline;
     }
 
-    @keyframes backgroundChange {
-      0% { background-image: url('https://source.unsplash.com/random/1920x1080/?nature,water'); }
-      33% { background-image: url('https://source.unsplash.com/random/1920x1080/?forest'); }
-      66% { background-image: url('https://source.unsplash.com/random/1920x1080/?mountains'); }
-      100% { background-image: url('https://source.unsplash.com/random/1920x1080/?sky'); }
+    .terms {
+      margin-top: 30px;
+      text-align: left;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .terms h2 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .terms p {
+      margin: 10px 0;
+      line-height: 1.6;
     }
   </style>
-  <script>
-    // Disable right-click to protect your frontend code
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
-  </script>
 </head>
 <body>
   <div class="container">
@@ -104,22 +116,14 @@
       <p class="notice">By clicking proceed, you agree to our <a href="#terms">Terms and Conditions</a>.</p>
     </form>
 
-    <div class="about" id="about">
-      <h2>About Us</h2>
-      <p>
-        Welcome to our Portal. Our goal is to provide a seamless and secure way to help customers. 
-        We prioritize security and customer satisfaction, ensuring every transaction is safe and straightforward.
-      </p>
-      <p>
-        For any inquiries, please <a href="0751 201 9773">contact us</a>.
-      </p>
-    </div>
-
     <div class="terms" id="terms">
       <h2>Terms and Conditions</h2>
       <p>
         All payments are non-refundable. By using this website, you agree to our policies. Unauthorized copying or
         duplication of this website will result in legal actions. We reserve the right to update our terms without prior notice.
+      </p>
+      <p>
+        This portal ensures security by encrypting sensitive data. Please reach out to support for any issues.
       </p>
     </div>
   </div>

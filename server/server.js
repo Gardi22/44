@@ -1,47 +1,76 @@
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const axios = require('axios'); // For handling API requests securely on the server side.
+require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const { Client } = require("pg"); // PostgreSQL client
+const fetch = require("node-fetch"); // For API requests
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+
+// Database connection
+const db = new Client({
+  connectionString: process.env.DATABASE_URL,
+});
+db.connect()
+  .then(() => console.log("Connected to database"))
+  .catch((err) => console.error("Database connection error:", err.stack));
 
 // Middleware
-app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve static files like index.html, main.css, and main.js.
 
-// Payment API Endpoint
-app.post('/api/process-payment', async (req, res) => {
-  const { amount } = req.body;
+// API route for payment processing
+app.post("/api/process-payment", async (req, res) => {
+  const { currency, amount, deviceInfo } = req.body;
 
-  if (!amount || amount <= 0) {
-    return res.status(400).json({ error: 'Invalid amount' });
+  if (!currency || !amount || !deviceInfo) {
+    return res.status(400).json({ success: false, message: "Invalid input" });
   }
 
   try {
-    // Replace the following with your payment API integration.
-    // Example: API request to your payment provider with the secret key.
-    const response = await axios.post(
-      'https://api.example.com/process-payment', // Replace with your payment API URL.
-      { amount }, // Send the amount to the API.
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.API_KEY}`, // Securely use your API key.
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    // Call the external payment API
+    const paymentResponse = await fetch(process.env.PAYMENT_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.API_SECRET_KEY}`,
+      },
+      body: JSON.stringify({ currency, amount }),
+    });
 
-    res.json({ success: true, message: 'Payment processed successfully', data: response.data });
+    const paymentResult = await paymentResponse.json();
+
+    if (paymentResult.success) {
+      // Log the successful transaction to the database
+      const transactionTime = new Date().toISOString();
+      const query = `
+        INSERT INTO transactions (amount, currency, device_info, transaction_time, status)
+        VALUES ($1, $2, $3, $4, $5)
+      `;
+      const values = [amount, currency, deviceInfo, transactionTime, "SUCCESS"];
+
+      await db.query(query, values);
+
+      res.json({
+        success: true,
+        message: "Payment processed successfully",
+        transactionId: paymentResult.transactionId,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Payment failed",
+      });
+    }
   } catch (error) {
-    console.error('Payment error:', error);
-    res.status(500).json({ error: 'Payment failed, please try again later' });
+    console.error("Error processing payment:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
